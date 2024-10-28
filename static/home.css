@@ -1,0 +1,17 @@
+#home-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    border: 1px solid black;
+    margin: 1rem;
+    padding: .5rem 1rem;
+    transition: transform;
+}
+
+a:hover {
+    transform: scale(1.1);
+}

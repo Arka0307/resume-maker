@@ -1,0 +1,25 @@
+body {
+    align-content: center;
+}
+
+#login-body {
+    margin:10rem auto;
+    width:50%;
+    background-color: azure;
+    border:1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    align-self: center;
+    margin: auto;
+}
+
+input {
+    align-self: center;
+    margin: .7rem auto;
+    padding: .4rem;
+}

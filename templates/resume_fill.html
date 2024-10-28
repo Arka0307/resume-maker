@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Maker{% endblock %}
+
+{% block content %}
+
+<h1 style="color:red;">Make Your Resume</h1>
+<section id="bod">
+    <form action="{{url_for('fillup')}}" class="resume-form" method="POST" enctype="multipart/form-data">
+        <section id="details">
+            <h3>Enter your Details here</h3>
+            <label for="userimg">Select your image</label>
+            <input type="file" id="userimg" name="userimg" accept="image/*" required><br>
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="userphn">Contact</label>
+            <input type="text" id="userphn" name="userphn" required><br>
+            <label for="useremail">Email</label>
+            <input type="email" id="useremail" name="useremail" required><br>
+            <label for="objective">Objective</label>
+            <input type="text" id="objective" name="objective" required><br>
+        </section>
+
+        <section id="education">
+            <h4>Add Your Education</h4>
+            <label for="clgname">College Name</label><br>
+            <input type="text" id="clgname" name="clgname"><br>
+            <label for="degree">Degree & Specialization</label><br>
+            <input type="text" id="degree" name="degree"><br>
+            <label for="duration">Year start - Year end</label><br>
+            <input type="text" id="duration" name="duration"><br>
+            <label for="marks">C.G.P.A / Percentage</label><br>
+            <input type="number" id="marks" name="marks"><br>
+        </section>
+
+        <section id="skills">
+            <h4>Add Your Skills</h4>
+            <label for="userskill_0">Add Skill</label><br>
+            <div id="ss">
+                <input type="text" id="userskill_0" name="userskill[]">
+            </div>
+            <button type="button" onclick="addSkill()">Add</button>
+        </section>
+
+        <section id="workexperience">
+            <h4>Add Your Work Experience</h4>
+            <label for="workexp_0">Add Work Experience</label><br>
+            <div id="ws">
+                <input type="text" id="workexp_0" name="workexp[]">
+            </div>
+            <button type="button" onclick="addWork()">Add</button>
+        </section>
+
+        <section id="projects">
+            <h4>Add Your Projects</h4>
+            <label for="userproj_0">Add Projects</label><br>
+            <div id="ps">
+                <input type="text" id="userproj_0" name="userproj[]">
+            </div>
+            <button type="button" onclick="addProj()">Add</button>
+        </section>
+
+        <section id="certificates">
+            <h4>Add Your Certificates</h4>
+            <label for="usercert_0">Add Certificates</label><br>
+            <div id="cs">
+                <input type="url" id="usercert_0" name="usercert[]">
+            </div>
+            <button type="button" onclick="addCert()">Add</button>
+        </section>
+        <button type="submit">Submit</button>
+    </form>
+</section>
+
+<!---->
+
+<script>
+    let skillCounter = 1;
+    let workCounter = 1;
+    let projCounter = 1;
+    let certCounter = 1;
+
+    function addSkill() {
+        const input = document.createElement('input');
+        const skillcont = document.getElementById('ss');
+        input.type = 'text';
+        input.name = 'userskill[]';
+        input.id = 'userskill_${skillCounter}';
+        input.placeholder = 'Additional Skill';
+        input.style.display = 'block';
+
+        skillcont.appendChild(input);
+
+        skillCounter++;
+    }
+
+    function addWork() {
+        const input = document.createElement('input');
+        const workcont = document.getElementById('ws');
+        input.type = 'text';
+        input.name = 'workexp[]';
+        input.id = 'workexp_${workCounter}';
+        input.placeholder = 'Additional work Experience';
+        input.style.display = 'block';
+
+        workcont.appendChild(input);
+
+        workCounter++;
+    }
+
+    function addProj() {
+        const input = document.createElement('input');
+        const projcont = document.getElementById('ps');
+        input.type = 'text';
+        input.name = 'userproj[]';
+        input.id = 'userproj_${projCounter}';
+        input.placeholder = 'Additional Projects';
+        input.style.display = 'block';
+
+        projcont.appendChild(input);
+
+        projCounter++;
+    }
+
+    function addCert() {
+        const input = document.createElement('input');
+        const certcont = document.getElementById('cs');
+        input.type = 'url';
+        input.name = 'usercert[]';
+        input.id = 'usercert_${certCounter}';
+        input.placeholder = 'Additional Certifications';
+        input.style.display = 'block';
+
+        certcont.appendChild(input);
+
+        certCounter++;
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume_styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#education">education</a></li>
+                <li><a href="#workexperience">experience</a></li>
+                <li><a href="#skills">skills</a></li>
+                <li><a href="#projects">projects</a></li>
+                <li><a href="#certificates">certifications</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main-body">
+        <div id="details">
+            {% if photo_url %}
+                <img id="profile" src="{{ photo_url }}" alt="uploaded photo">
+            {% endif %}
+            <p id="hi">Hi I Am</p>
+            <p id="name">{{ name }}</p>
+            <p id="objc"><strong>Objective:</strong> {{ objective }}</p>
+        </div>
+        <div class="carousel">
+            <div class="carousel-item" id="education">
+                <h3 id="edu-head" onclick="showEdu()">Education</h3>
+            </div>
+            <div class="carousel-item" id="skills">
+                <h3 id="skill-head" onclick="showSkill()">Skills</h3>
+            </div>
+            <div class="carousel-item" id="workexperience">
+                <h3 id="exp-head" onclick="showExp()">Work Experience</h3>
+            </div>
+            <div class="carousel-item" id="projects">
+                <h3 id="proj-head" onclick="showProj()">Projects</h3>
+            </div>
+            <div class="carousel-item" id="certificates">
+                <h3 id="cert-head" onclick="showCert()">Certifications</h3>
+            </div>
+        </div>
+        <div id="extended-details">
+            <p><strong>College Name:</strong> {{ clname }}</p>
+            <p><strong>Degree:</strong> {{ dgr }}</p>
+            <p><strong>Duration:</strong> {{ durn }}</p>
+            <p><strong>Marks:</strong> {{ mrks }}</p>
+        </div>
+        <div id="extended-skill">
+            <ul>
+                {% for skill in skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="extended-exp">
+            <ul>
+                {% for wexp in wexps %}
+                    <li>{{ wexp }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="extended-proj">
+            <ul>
+                {% for prj in prjs %}
+                    <li>{{ prj }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="extended-cert">
+            <ul>
+                {% for crf in crfs %}
+                    <li><a href="{{ crf }}">Certificate</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <p>Your resume is available at the following link:</p>
+        <a target="_blank" href="{{ url_for('resume', username=name) }}">
+            {{ request.host_url }}resume/{{ name }}
+        </a>
+    </main>
+    <footer>
+        <ul>
+            <li id="cnt"><strong>Contact:</strong> {{ phn }}</li>
+            <li id="email"><strong>Email:</strong> {{ uemail }}</li>
+        </ul>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel({
+                /*fullWidth: true,
+                indicators: */
+                padding:90
+            });
+        });
+        const edu = document.getElementById('education');
+        const ski = document.getElementById('skills');
+        const wex = document.getElementById('workexperience');
+        const pro = document.getElementById('projects');
+        const cer = document.getElementById('certificates');
+
+        const edt = document.getElementById('extended-details');
+        const sdt = document.getElementById('extended-skill');
+        const wdt = document.getElementById('extended-exp');
+        const pdt = document.getElementById('extended-proj');
+        const cdt = document.getElementById('extended-cert');
+
+        function showEdu() {
+            if (edt.style.visibility === "hidden"){
+                edt.style.visibility = "visible";
+                edt.style.display = "flex";
+                edt.style.flexDirection = "column";
+                edt.style.width = "40%";
+                edt.style.margin = "auto";
+                edt.style.padding = "1rem";
+                edt.style.justifyContent = "center";
+                edt.style.alignItems = "center";
+                edt.style.backgroundColor = "#61dafb";
+            } else if (edt.style.visibility === "visible" || this.id != "education") {
+                edt.style.visibility = "hidden";
+                edt.style.display = "none";
+            }
+        }
+
+        function showSkill() {
+            if (sdt.style.visibility === "hidden"){
+                sdt.style.visibility = "visible";
+                sdt.style.display = "flex";
+                sdt.style.flexDirection = "column";
+                sdt.style.width = "40%";
+                sdt.style.margin = "auto";
+                sdt.style.padding = "1rem";
+                sdt.style.justifyContent = "center";
+                sdt.style.alignItems = "center";
+                sdt.style.backgroundColor = "#61dafb";
+            } else if (sdt.style.visibility === "visible" || this.id != "skills") {
+                sdt.style.visibility = "hidden";
+                sdt.style.display = "none";
+            }
+
+        }
+
+        function showExp() {
+            if (wdt.style.visibility === "hidden"){
+                wdt.style.visibility = "visible";
+                wdt.style.display = "flex";
+                wdt.style.flexDirection = "column";
+                wdt.style.width = "40%";
+                wdt.style.margin = "auto";
+                wdt.style.padding = "1rem";
+                wdt.style.justifyContent = "center";
+                wdt.style.alignItems = "center";
+                wdt.style.backgroundColor = "#61dafb";
+            } else if (wdt.style.visibility === "visible" || this.id != "workexperience") {
+                wdt.style.visibility = "hidden";
+                wdt.style.display = "none";
+            }
+
+        }
+
+        function showProj() {
+            if (pdt.style.visibility === "hidden"){
+                pdt.style.visibility = "visible";
+                pdt.style.display = "flex";
+                pdt.style.flexDirection = "column";
+                pdt.style.width = "40%";
+                pdt.style.margin = "auto";
+                pdt.style.padding = "1rem";
+                pdt.style.justifyContent = "center";
+                pdt.style.alignItems = "center";
+                pdt.style.backgroundColor = "#61dafb";
+            } else if (pdt.style.visibility === "visible" || this.id != "projects") {
+                pdt.style.visibility = "hidden";
+                pdt.style.display = "none";
+            }
+
+        }
+
+        function showCert() {
+            if (cdt.style.visibility === "hidden"){
+                cdt.style.visibility = "visible";
+                cdt.style.display = "flex";
+                cdt.style.flexDirection = "column";
+                cdt.style.width = "40%";
+                cdt.style.margin = "auto";
+                cdt.style.padding = "1rem";
+                cdt.style.justifyContent = "center";
+                cdt.style.alignItems = "center";
+                cdt.style.backgroundColor = "#61dafb";
+            } else if (cdt.style.visibility === "visible" || this.id != "certificates") {
+                cdt.style.visibility = "hidden";
+                cdt.style.display = "none";
+            }
+        }
+
+        edu.addEventListener('click', showEdu);
+        ski.addEventListener('click', showSkill);
+        wex.addEventListener('click', showExp);
+        pro.addEventListener('click', showProj);
+        cer.addEventListener('click', showCert);
+    </script>
+</body>
+</html>
